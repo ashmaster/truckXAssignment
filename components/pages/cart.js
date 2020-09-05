@@ -61,7 +61,8 @@ class CartScreen extends React.Component {
       
   }
   render() {
-    return (
+    if(this.props.cartItems.length !== 0 )
+    {return (
       <View style={{flex: 1,backgroundColor:'#fff'}}>
         <StatusBar backgroundColor = '#fff' barStyle = 'dark-content' />
         <Header name = "Cart" toggleDrawer = {()=>this.props.navigation.toggleDrawer()}/>
@@ -74,7 +75,7 @@ class CartScreen extends React.Component {
                               <View onPress = {()=>console.log(this.props.cartItems)} style = {{alignItems:'center',height:130,marginBottom:20,flexDirection:'row',borderBottomWidth:0.6,borderBottomColor:'#000',marginLeft:10}}>
                                 <Image source = {{uri:item.image}} style = {{width:'30%',height:'70%',borderRadius:15}}/>
                                 <View style = {{marginLeft:15,alignSelf:'flex-start',marginTop:30,width:'60%'}}>
-                                  <View style = {{height:'50%'}}><Text style = {{fontWeight:'bold',fontSize:18}}>{item.title}</Text></View>
+                                  <View style = {{height:'50%'}}><Text style = {{fontWeight:'bold',fontSize:16}}>{item.title}</Text></View>
                                   <View style = {{height:'50%'}}><Text>$ {item.price}</Text></View>
                                 </View>
                                 
@@ -117,6 +118,19 @@ class CartScreen extends React.Component {
         </View>
       </View>
     );
+  }
+  else{
+    return(
+      <View style = {{flex:1,alignItems:'center'}}>
+        <StatusBar backgroundColor = '#fff' barStyle = 'dark-content' />
+        <Header name = "Cart" toggleDrawer = {()=>this.props.navigation.toggleDrawer()}/>
+        <View style = {{justifyContent:'center',flex:1,alignItems:'center'}}>
+          <Text style = {{fontSize:18,marginBottom:20}}>No items added to cart</Text>
+          <Text onPress = {()=>this.props.navigation.navigate("Main")} style = {{fontSize:18,color:'#2780E3'}}>Go to Products</Text>
+        </View>
+      </View>
+    )
+  }
   }
 
 }

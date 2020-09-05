@@ -60,7 +60,7 @@ class MainScreen extends React.Component {
                         <Image source = {{uri:item.image}} style = {{width:'30%',height:'90%',borderRadius:15,alignSelf:'center',marginLeft:5}}/>
                         <View style = {{flexDirection:'column',marginLeft:20}}>
                           <View><Text style = {{fontWeight:'bold',fontSize:18,marginTop:20}}>{item.title}</Text></View>
-                          <View style = {{height:'30%'}}/>
+                          <View style = {{height:20}}/>
                           <View style = {{flexDirection:'row'}}>
                           <LinearGradient colors={['#DA22FF', '#9733EE']} start={{x: 0, y: 0}} end={{x: 1, y: 0}} style={{width:90,justifyContent:'center',alignItems:'center',height:35,borderRadius:15}}>
                             <TouchableOpacity onPress = {()=>this.setState({current:item,modalOpen:true})} style = {styles.touchables}>
@@ -70,7 +70,7 @@ class MainScreen extends React.Component {
                             </TouchableOpacity>
                             </LinearGradient>
                             <View style = {{width:'5%'}}/>
-                            <LinearGradient colors={['#1A2980', '#26D0CE']} start={{x: 0, y: 0}} end={{x: 1, y: 0}} style={{width:120,justifyContent:'center',alignItems:'center',height:35,borderRadius:15}}>
+                            <LinearGradient colors={['#26D0CE','#1A2980']} start={{x: 0, y: 0}} end={{x: 1, y: 0}} style={{width:120,justifyContent:'center',alignItems:'center',height:35,borderRadius:15}}>
                             
                             {item.quantity == 1 ? <TouchableOpacity onPress={()=>this.props.navigation.navigate("Cart")} style = {styles.touchables}>
                             
@@ -110,12 +110,17 @@ class MainScreen extends React.Component {
                                 </View>
 
                                 <View style = {{height:0.5,width:Dimensions.get('screen').width/1.8,borderWidth:0.5,marginTop:40,opacity:0.5}}/>
-
-                                <TouchableOpacity onPress = {() => this.handlePress(this.state.current.id)} style = {{marginTop:40,width:Dimensions.get('screen').width/2,paddingVertical:10,backgroundColor:'#009ACD',alignItems:'center',justifyContent:'center',borderRadius:8}}>
+                                {this.state.current.quantity == 0 ? <TouchableOpacity onPress = {() => this.handlePress(this.state.current.id,this.state.current.title)} style = {{marginTop:40,width:Dimensions.get('screen').width/2,paddingVertical:10,backgroundColor:'#009ACD',alignItems:'center',justifyContent:'center',borderRadius:8}}>
                                     <Text style = {{fontSize:20,fontWeight:'bold',color:'white'}}>
                                         Add to cart
                                     </Text>
-                                </TouchableOpacity>
+                                </TouchableOpacity> : 
+                                <TouchableOpacity onPress = {() => {this.setState({modalOpen:false});this.props.navigation.navigate("Cart")}} style = {{marginTop:40,width:Dimensions.get('screen').width/2,paddingVertical:10,backgroundColor:'#009ACD',alignItems:'center',justifyContent:'center',borderRadius:8}}>
+                                    <Text style = {{fontSize:20,fontWeight:'bold',color:'white'}}>
+                                        Go to cart
+                                    </Text>
+                                </TouchableOpacity>}
+                                
 
                             </View>    
                          </View>

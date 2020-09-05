@@ -19,7 +19,7 @@ import AppNavigator from './components/navigator';
 import 'react-native-gesture-handler';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
-
+console.disableYellowBox = true;
 const initialState = {
   total:0,
   cartItems: [],

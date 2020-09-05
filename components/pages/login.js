@@ -17,11 +17,10 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {min} from 'react-native-reanimated';
 
-export default class EnterNumberScreen extends React.Component {
+export default class LoginScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      number: 0,
       loading: false,
       email: '',
       emailVerify: false,
@@ -73,18 +72,6 @@ export default class EnterNumberScreen extends React.Component {
   async afterHide() {
     this.setState({loading: true});
     this.props.navigation.navigate('Home');
-  }
-  afterHideAnim() {
-    Animated.parallel([
-      Animated.timing(this.buttonWidth, {
-        delay: 200,
-        toValue: 0,
-      }),
-      Animated.timing(this.buttonOpacity, {
-        delay: 100,
-        toValue: 1,
-      }),
-    ]).start();
   }
 
   pressed() {
@@ -199,7 +186,7 @@ export default class EnterNumberScreen extends React.Component {
             </View>
             <View
               style={[
-                styles.number,
+                styles.entry,
                 {
                   flexDirection: 'row',
                   alignItems: 'center',
@@ -207,15 +194,13 @@ export default class EnterNumberScreen extends React.Component {
                   paddingHorizontal: 30,
                 },
               ]}>
-              {/*EMAIL INPUT FIELD */}
               <Animated.View style={{width, alignSelf: 'center'}}>
                 <TextInput
                   style={{
                     borderBottomWidth: 4,
                     borderColor: '#ccc',
                     paddingLeft: 5,
-                    fontSize: 18,
-                    height: 40,
+                    fontSize: 14,
                   }}
                   keyboardType="default"
                   placeholder="Email-id"
@@ -230,7 +215,7 @@ export default class EnterNumberScreen extends React.Component {
             </View>
             <View
               style={[
-                styles.number,
+                styles.entry,
                 {
                   flexDirection: 'row',
                   alignItems: 'center',
@@ -239,15 +224,13 @@ export default class EnterNumberScreen extends React.Component {
                   marginBottom: 10,
                 },
               ]}>
-              {/*PASSWORD INPUT FIELD */}
               <Animated.View style={{width, alignSelf: 'center'}}>
                 <TextInput
                   style={{
                     borderBottomWidth: 4,
                     borderColor: '#ccc',
                     paddingLeft: 5,
-                    fontSize: 18,
-                    height: 40,
+                    fontSize: 14,
                   }}
                   keyboardType="default"
                   placeholder="Password"
@@ -291,7 +274,6 @@ export default class EnterNumberScreen extends React.Component {
                 *Atleast 1 digit
               </Text>
             </View>
-            {/*NEXT BUTTON */}
           </Animated.View>
           <TouchableOpacity
             style={{width: '100%'}}
@@ -318,22 +300,6 @@ export default class EnterNumberScreen extends React.Component {
               </Text>
             </Animated.View>
           </TouchableOpacity>
-
-          <View
-            style={{
-              backgroundColor: '#fff',
-              flexDirection: 'row',
-              alignItems: 'flex-end',
-            }}>
-            <Image
-              style={{
-                width: Dimensions.get('window').width + 100,
-                height: (Dimensions.get('window').width * 2) / 3,
-                marginTop: '10%',
-              }}
-              source={require('../../assets/bckgrd.jpg')}
-            />
-          </View>
           <ActivityIndicator
             size="large"
             animating={this.state.loading}
@@ -345,21 +311,14 @@ export default class EnterNumberScreen extends React.Component {
   }
 }
 
-EnterNumberScreen.navigationOptions = (navData) => {
-  hello = new EnterNumberScreen().state;
-  return {
-    headerTitle: 'Campus Ring',
-  };
-};
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     height: '100%',
     width: '100%',
-    position: 'absolute',
     alignItems: 'center',
+    justifyContent:'center',
     backgroundColor: '#fff',
-    marginTop: '10%',
   },
   card: {
     borderTopColor: '#8A4AD9',
@@ -371,7 +330,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 10,
     marginBottom: '5%',
   },
-  number: {
+  entry: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -385,12 +344,5 @@ const styles = StyleSheet.create({
     height: 35,
     fontSize: 18,
     paddingLeft: 15,
-  },
-  connectSocially: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 30,
-    backgroundColor: '#8A4AD9',
-    marginLeft: 40,
   },
 });
